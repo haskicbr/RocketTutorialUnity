@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class Rocket : MonoBehaviour
 {
   [SerializeField] private float _thrustForce = 30f;
