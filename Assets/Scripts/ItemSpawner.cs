@@ -2,10 +2,8 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Rocket))]
 public class ItemSpawner : MonoBehaviour
 {
-
   [SerializeField] private GameObject _alien;
   [SerializeField] private GameObject _asteroid;
   [SerializeField] private GameObject _spaceTrash;
