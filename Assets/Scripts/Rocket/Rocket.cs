@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,16 +8,24 @@ public class Rocket : MonoBehaviour
   [SerializeField] private float _thrustForce = 30f;
   [SerializeField] private float _rotationSpeed = 100f;
   [SerializeField] private float _maxEngineVelocityY = 50f;
-
-
+  [SerializeField] private int _rocketHealth = 100;
+  
+  
   private Rigidbody _rocketRigidBody;
   private AudioSource _engineSound;
-
-
-  void Start()
+  
+  private void Start()
   {
     _rocketRigidBody = GetComponent<Rigidbody>();
     _engineSound = GetComponent<AudioSource>();
+
+    RocketEvents.DestroyRocketEvent.AddListener(Destroy);
+  }
+  
+  private void Update()
+  {
+    RunEngine();
+    Rotate();
   }
 
   private void changeFreezeRotation(bool freezRotaion)
@@ -31,7 +40,7 @@ public class Rocket : MonoBehaviour
     }
   }
 
-  private void RunEngune()
+  private void RunEngine()
   {
     if (Input.GetKey(KeyCode.Space))
     {
@@ -71,9 +80,18 @@ public class Rocket : MonoBehaviour
     changeFreezeRotation(axisHorizontal != 0);
   }
 
-  private void Update()
+  private void Destroy()
   {
-    RunEngune();
-    Rotate();
+    foreach (Transform child in transform)
+    {
+      child.SetParent(null);
+      
+      var childRigidBody = child.transform.gameObject.AddComponent<Rigidbody>();
+      childRigidBody.mass = 0.3f;
+      childRigidBody.AddExplosionForce(200f, transform.position, 15.0F);
+    }
+
+    gameObject.SetActive(false);
+    RocketEvents.DestroyRocketEvent.RemoveListener(Destroy);
   }
 }
