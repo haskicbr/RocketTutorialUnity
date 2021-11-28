@@ -6,9 +6,12 @@ public class Rocket : MonoBehaviour
 {
   [SerializeField] private float _thrustForce = 30f;
   [SerializeField] private float _rotationSpeed = 100f;
+  [SerializeField] private float _maxEngineVelocityY = 50f;
+
 
   private Rigidbody _rocketRigidBody;
   private AudioSource _engineSound;
+
 
   void Start()
   {
@@ -38,6 +41,12 @@ public class Rocket : MonoBehaviour
       }
 
       _rocketRigidBody.AddRelativeForce(Vector3.up * _thrustForce);
+
+      if (_rocketRigidBody.velocity.y >= _maxEngineVelocityY)
+      {
+        var currentVelocity = _rocketRigidBody.velocity;
+        _rocketRigidBody.velocity = new Vector3(currentVelocity.x, _maxEngineVelocityY, currentVelocity.z);
+      }
     }
     else
     {
