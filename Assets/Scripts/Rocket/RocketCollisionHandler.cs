@@ -5,7 +5,7 @@ public class RocketCollisionHandler : MonoBehaviour
 {
   private void OnCollisionEnter(Collision other)
   {
-    if (!other.transform.gameObject.CompareTag(GameTags.FRIENDLY))
+    if (!other.transform.gameObject.CompareTag(GameTags.Friendly))
     {
       RocketEvents.DestroyRocketEvent.Invoke();
     }
@@ -23,10 +23,10 @@ public class RocketCollisionHandler : MonoBehaviour
   {
     switch (other.transform.gameObject.tag)
     {
-      case GameTags.FRIENDLY:
+      case GameTags.Friendly:
         Destroy(other.transform.gameObject);
         break;
-      case GameTags.TRAJECTORY:
+      case GameTags.Trajectory:
         RocketEvents.DestroyRocketEvent.Invoke();
         break;
     }
