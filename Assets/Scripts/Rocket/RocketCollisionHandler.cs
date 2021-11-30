@@ -7,7 +7,7 @@ public class RocketCollisionHandler : MonoBehaviour
   {
     if (!other.transform.gameObject.CompareTag(GameTags.Friendly))
     {
-      RocketEvents.DestroyRocketEvent.Invoke();
+      //RocketEvents.DestroyRocketEvent.Invoke();
     }
   }
 
@@ -15,7 +15,7 @@ public class RocketCollisionHandler : MonoBehaviour
   {
     if (transform.childCount == 0)
     {
-      RocketEvents.DestroyRocketEvent.Invoke();
+      //RocketEvents.DestroyRocketEvent.Invoke();
     }
   }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +8,9 @@ public class Rocket : MonoBehaviour
 {
   [SerializeField] private float _thrustForce = 30f;
   [SerializeField] private float _rotationSpeed = 100f;
+  [SerializeField] private float _thrustForceHorizontal = 1000f;
   [SerializeField] private float _maxEngineVelocityY = 50f;
   [SerializeField] private int _rocketHealth = 100;
-  
   
   private Rigidbody _rocketRigidBody;
   private AudioSource _engineSound;
@@ -22,7 +23,7 @@ public class Rocket : MonoBehaviour
     RocketEvents.DestroyRocketEvent.AddListener(Destroy);
   }
   
-  private void Update()
+  private void FixedUpdate()
   {
     RunEngine();
     Rotate();
@@ -36,7 +37,7 @@ public class Rocket : MonoBehaviour
     }
     else
     {
-      _rocketRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+      _rocketRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
   }
 
@@ -44,11 +45,11 @@ public class Rocket : MonoBehaviour
   {
     if (Input.GetKey(KeyCode.Space))
     {
-      if (!_engineSound.isPlaying)
+      if (_engineSound.volume < 1f)
       {
-        _engineSound.Play();
+        _engineSound.volume += 0.05f;
       }
-
+      
       _rocketRigidBody.AddRelativeForce(Vector3.up * _thrustForce);
 
       if (_rocketRigidBody.velocity.y >= _maxEngineVelocityY)
@@ -59,9 +60,10 @@ public class Rocket : MonoBehaviour
     }
     else
     {
-      if (_engineSound.isPlaying)
+
+      if (_engineSound.volume > 0f)
       {
-        _engineSound.Stop();
+        _engineSound.volume -= 0.05f;
       }
     }
   }
@@ -76,8 +78,19 @@ public class Rocket : MonoBehaviour
       var changedRotation = new Vector3(0, 0, -axisHorizontal);
       transform.Rotate(changedRotation * rotationSpeed);
     }
-
-    changeFreezeRotation(axisHorizontal != 0);
+    
+    
+    /**
+     *     float axisHorizontal = Input.GetAxis("Horizontal");
+    float rotationSpeed = _rotationSpeed * Time.deltaTime;
+    
+    if (axisHorizontal != 0)
+    {
+      Vector3 horizontalForceVector = new Vector3(axisHorizontal, 0, 0);
+      _rocketRigidBody.AddForce(horizontalForceVector * Time.deltaTime * _rotationSpeed);
+      var changedRotation = new Vector3(0, 0, -axisHorizontal);
+    }
+     */
   }
 
   private void Destroy()
@@ -91,7 +104,7 @@ public class Rocket : MonoBehaviour
       childRigidBody.AddExplosionForce(200f, transform.position, 15.0F);
     }
 
-    gameObject.SetActive(false);
+    _engineSound.Stop();
     RocketEvents.DestroyRocketEvent.RemoveListener(Destroy);
   }
 }
