@@ -409,7 +409,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fbd099206ba9986e86214521e896b90, type: 2}
+  - {fileID: 2100000, guid: cfccd790565dbc7498b17c419c4d1bc7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5371,7 +5371,7 @@ PrefabInstance:
     - target: {fileID: 7287876503269349551, guid: 3585eea293c6293609f72738fb045358, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
+      objectReference: {fileID: 2100000, guid: 5e5af1b167ceacfa9b45979e2bda01a8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3585eea293c6293609f72738fb045358, type: 3}
 --- !u!108 &705507994 stripped
@@ -15386,7 +15386,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fbd099206ba9986e86214521e896b90, type: 2}
+  - {fileID: 2100000, guid: cfccd790565dbc7498b17c419c4d1bc7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15599,7 +15599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1424924287
 Transform:
   m_ObjectHideFlags: 0
@@ -15739,7 +15739,7 @@ PrefabInstance:
     - target: {fileID: 7287876503269349551, guid: 3585eea293c6293609f72738fb045358, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
+      objectReference: {fileID: 2100000, guid: 5e5af1b167ceacfa9b45979e2bda01a8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3585eea293c6293609f72738fb045358, type: 3}
 --- !u!1001 &1591237911
@@ -15919,7 +15919,7 @@ PrefabInstance:
     - target: {fileID: 7287876503269349551, guid: 3585eea293c6293609f72738fb045358, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
+      objectReference: {fileID: 2100000, guid: 5e5af1b167ceacfa9b45979e2bda01a8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3585eea293c6293609f72738fb045358, type: 3}
 --- !u!4 &1905588608 stripped
@@ -16401,7 +16401,7 @@ PrefabInstance:
     - target: {fileID: 7287876503269349551, guid: 3585eea293c6293609f72738fb045358, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
+      objectReference: {fileID: 2100000, guid: 5e5af1b167ceacfa9b45979e2bda01a8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3585eea293c6293609f72738fb045358, type: 3}
 --- !u!1001 &6734992041941015330
@@ -16462,7 +16462,7 @@ PrefabInstance:
     - target: {fileID: 5884334099561314070, guid: 6c0c9541f9ad5257ea26f4b5fdd50915, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2fbd099206ba9986e86214521e896b90, type: 2}
+      objectReference: {fileID: 2100000, guid: cfccd790565dbc7498b17c419c4d1bc7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c0c9541f9ad5257ea26f4b5fdd50915, type: 3}
 --- !u!1001 &8662675691297572335
@@ -16532,5 +16532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 963194229, guid: 68bb001050a3e311486a369640bc05f7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 68bb001050a3e311486a369640bc05f7, type: 3}
