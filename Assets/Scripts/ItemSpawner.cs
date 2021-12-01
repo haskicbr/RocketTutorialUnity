@@ -11,20 +11,20 @@ public class ItemSpawner : MonoBehaviour
   [SerializeField] private Rocket _rocket;
   [SerializeField] private float _differenceRocketPosition = 50f;
   [SerializeField] private float _minSpwanPositionX = -5f;
-  [SerializeField] private float _maxSpawnPositionX= 5f;
-  
+  [SerializeField] private float _maxSpawnPositionX = 5f;
+
   private float _lastSpawnPosition = 0f;
-  
+
   private void Start()
   {
     _lastSpawnPosition = _rocket.transform.position.y;
   }
-  
+
   private void Update()
   {
     float rocketPositionY = _rocket.transform.position.y;
-    
-    if (rocketPositionY  > _lastSpawnPosition)
+
+    if (rocketPositionY > _lastSpawnPosition)
     {
       _lastSpawnPosition = rocketPositionY + _differenceRocketPosition;
       SpawnItems();
@@ -36,15 +36,16 @@ public class ItemSpawner : MonoBehaviour
   {
     GameObject battery = Instantiate(_battery);
     float spawnXPosition = Random.Range(_minSpwanPositionX, _maxSpawnPositionX);
-    battery.transform.position = new Vector3(spawnXPosition, _rocket.transform.position.y + Random.Range(50f, 75f), 0f);
-    
+    battery.transform.position =
+      new Vector3(spawnXPosition, _rocket.transform.position.y + 100f + Random.Range(50f, 75f), 0f);
   }
 
   private void SpawnSpaceTrash()
   {
     GameObject battery = Instantiate(_spaceTrash);
     float spawnXPosition = Random.Range(_minSpwanPositionX, _maxSpawnPositionX);
-    battery.transform.position = new Vector3(spawnXPosition, _rocket.transform.position.y + Random.Range(50f, 75f), 0f);
+    battery.transform.position =
+      new Vector3(spawnXPosition, _rocket.transform.position.y + 100f + Random.Range(50f, 75f), 0f);
   }
 
 
