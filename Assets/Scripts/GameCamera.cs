@@ -14,20 +14,22 @@ public class GameCamera : MonoBehaviour
   {
     transform.position = GetPositionByRocket();
 
-    RocketEvents.DestroyRocketEvent.AddListener(() =>
-    {
-      var childRigidBody = gameObject.AddComponent<Rigidbody>();
-      childRigidBody.mass = 2f;
-      childRigidBody.AddExplosionForce(200f, transform.position, 15.0F);
-
-      var cameraCollider = gameObject.AddComponent<BoxCollider>();
-      cameraCollider.size = new Vector3(1f, 1f, 1f);
-
-      _isTrackingRocket = false;
-    });
+    RocketEvents.DestroyRocketEvent.AddListener(AddCameraFallEffect);
   }
 
-  private void FixedUpdate()
+  private void AddCameraFallEffect()
+  {
+    var rigidBody = gameObject.AddComponent<Rigidbody>();
+    rigidBody.mass = 2f;
+    rigidBody.AddExplosionForce(200f, transform.position, 15.0F);
+
+    var collider = gameObject.AddComponent<BoxCollider>();
+    collider.size = new Vector3(1f, 1f, 1f);
+
+    _isTrackingRocket = false;
+  }
+  
+  private void Update()
   {
     if (_isTrackingRocket)
     {
