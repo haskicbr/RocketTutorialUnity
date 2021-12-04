@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Rocket : MonoBehaviour
+public class Rocket : ComposeBody
 {
   [SerializeField] private float _thrustForce = 30f;
   [SerializeField] private float _rotationSpeed = 100f;
@@ -13,26 +13,30 @@ public class Rocket : MonoBehaviour
   [SerializeField] private float _maxEngineVelocityY = 50f;
   [SerializeField] private int _rocketHealth = 100;
   [SerializeField] private HealthBar _healthBar;
-
+  [SerializeField] private GameObject[] _rocketEngines;
+  [SerializeField] private GameObject[] _rocketEnginesMain;
+  
   private Rigidbody _rocketRigidBody;
   private AudioSource _engineSound;
-  
+
   private void Start()
   {
     _rocketRigidBody = GetComponent<Rigidbody>();
     _engineSound = GetComponent<AudioSource>();
     _healthBar.СhangeHealth(_rocketHealth);
-    
+
     RocketEvents.DamageEvent.AddListener(Damage);
     RocketEvents.DestroyRocketEvent.AddListener(Destroy);
+    RocketEvents.DisconnectEnginesSecond.AddListener(() => DetachObjects(_rocketEngines, _rocketRigidBody.velocity));
+    RocketEvents.DisconnectEngineMain.AddListener(() => DetachObjects(_rocketEnginesMain, _rocketRigidBody.velocity));
   }
-  
+
   private void Damage(int damageValue)
   {
     _rocketHealth -= damageValue;
 
     _healthBar.СhangeHealth(_rocketHealth);
-    
+
     if (_rocketHealth <= 0)
     {
       RocketEvents.DestroyRocketEvent.Invoke();
@@ -40,6 +44,7 @@ public class Rocket : MonoBehaviour
       RocketEvents.DamageEvent.RemoveAllListeners();
     }
   }
+
   private void FixedUpdate()
   {
     RunEngine();
@@ -66,7 +71,7 @@ public class Rocket : MonoBehaviour
       {
         _engineSound.volume += 0.05f;
       }
-      
+
       _rocketRigidBody.AddRelativeForce(Vector3.up * _thrustForce);
 
       if (_rocketRigidBody.velocity.y >= _maxEngineVelocityY)
@@ -99,11 +104,12 @@ public class Rocket : MonoBehaviour
   private void Destroy()
   {
     List<Transform> children = new List<Transform>();
-    
-    for (int childCounter = 0; childCounter < transform.childCount; childCounter++) {
+
+    for (int childCounter = 0; childCounter < transform.childCount; childCounter++)
+    {
       children.Add(transform.GetChild(childCounter));
     }
-    
+
     foreach (Transform child in children)
     {
       child.SetParent(null, true);
@@ -111,9 +117,11 @@ public class Rocket : MonoBehaviour
       childRigidBody.mass = 0.3f;
       childRigidBody.AddExplosionForce(200f, transform.position, 15.0F);
     }
-    
+
     RocketEvents.DestroyRocketEvent.RemoveListener(Destroy);
-    
+    RocketEvents.DisconnectEnginesSecond.RemoveAllListeners();
+    RocketEvents.DisconnectEngineMain.RemoveAllListeners();
+
     _engineSound.Stop();
   }
 }

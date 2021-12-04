@@ -37,7 +37,7 @@ public class ItemSpawner : MonoBehaviour
     GameObject battery = Instantiate(_battery);
     float spawnXPosition = Random.Range(_minSpwanPositionX, _maxSpawnPositionX);
     battery.transform.position =
-      new Vector3(spawnXPosition, _rocket.transform.position.y + 100f + Random.Range(50f, 75f), 0f);
+      new Vector3(spawnXPosition, _rocket.transform.position.y + 200f + Random.Range(50f, 75f), 0f);
   }
 
   private void SpawnSpaceTrash()
@@ -45,7 +45,7 @@ public class ItemSpawner : MonoBehaviour
     GameObject battery = Instantiate(_spaceTrash);
     float spawnXPosition = Random.Range(_minSpwanPositionX, _maxSpawnPositionX);
     battery.transform.position =
-      new Vector3(spawnXPosition, _rocket.transform.position.y + 100f + Random.Range(50f, 75f), 0f);
+      new Vector3(spawnXPosition, _rocket.transform.position.y + 200f + Random.Range(50f, 75f), 0f);
   }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class RocketCollisionHandler : MonoBehaviour
 {
+
   private void OnCollisionEnter(Collision other)
   {
     switch (other.transform.gameObject.tag)
@@ -25,6 +27,16 @@ public class RocketCollisionHandler : MonoBehaviour
         break;
       case GameTags.Trajectory:
         RocketEvents.DamageEvent.Invoke(100);
+        break;
+    }
+  }
+
+  private void OnTriggerStay(Collider other)
+  {
+    switch (other.transform.gameObject.tag)
+    {
+      case GameTags.Trajectory:
+        RocketEvents.DamageEvent.Invoke(5);
         break;
     }
   }

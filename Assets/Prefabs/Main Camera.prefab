@@ -97,4 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rocket: {fileID: 0}
-  offsetRocketPositionY: -10
+  offsetRocketPositionY: -20.86

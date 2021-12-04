@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6007354551524356448}
   m_Layer: 0
   m_Name: BlockedObject
-  m_TagString: Untagged
+  m_TagString: SpaceTrash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2621453373033522331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.78, y: 1.47, z: 0}
-  m_LocalScale: {x: 3.6768148, y: 7.9286575, z: 2}
+  m_LocalScale: {x: 3.6768148, y: 1.0603786, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cfccd790565dbc7498b17c419c4d1bc7, type: 2}
+  - {fileID: 2100000, guid: 5e5af1b167ceacfa9b45979e2bda01a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
