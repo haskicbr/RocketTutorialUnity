@@ -29,7 +29,7 @@ public class DistanceHandler : MonoBehaviour
   private void Update()
   {
     _currentDistance = GetDistanceToSpace();
-    _distanceToSpaceText.text = $"Distance to space: {_distanceToSpace - _currentDistance} km";
+    _distanceToSpaceText.text = $"Distance : {_distanceToSpace - _currentDistance} km";
 
     if (_currentDistance > MainEnginesDistanceToDetach * GameDistanceToSpaceCoefficient)
     {

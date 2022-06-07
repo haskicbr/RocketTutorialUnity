@@ -11,6 +11,7 @@ public class Rocket : ComposeBody
   [SerializeField] private float _rotationSpeed = 100f;
   [SerializeField] private float _thrustForceHorizontal = 1000f;
   [SerializeField] private float _maxEngineVelocityY = 50f;
+  [SerializeField] private float _minEngineVelocityY = 50f;
   [SerializeField] private int _rocketHealth = 100;
   [SerializeField] private HealthBar _healthBar;
   [SerializeField] private GameObject[] _rocketEngines;
@@ -48,6 +49,12 @@ public class Rocket : ComposeBody
   private void FixedUpdate()
   {
     RunEngine();
+    var currentVelocity = _rocketRigidBody.velocity;
+      
+    if (_rocketRigidBody.velocity.y <= _minEngineVelocityY)
+    {
+      _rocketRigidBody.velocity = new Vector3(currentVelocity.x, _minEngineVelocityY, currentVelocity.z);
+    }
     Rotate();
   }
 
@@ -67,16 +74,18 @@ public class Rocket : ComposeBody
   {
     if (Input.GetKey(KeyCode.Space))
     {
-      if (_engineSound.volume < 1f)
+      if (_engineSound.volume < 0.25f)
       {
         _engineSound.volume += 0.05f;
       }
 
       _rocketRigidBody.AddRelativeForce(Vector3.up * _thrustForce);
 
+
+      var currentVelocity = _rocketRigidBody.velocity;
+
       if (_rocketRigidBody.velocity.y >= _maxEngineVelocityY)
       {
-        var currentVelocity = _rocketRigidBody.velocity;
         _rocketRigidBody.velocity = new Vector3(currentVelocity.x, _maxEngineVelocityY, currentVelocity.z);
       }
     }
@@ -97,7 +106,10 @@ public class Rocket : ComposeBody
     if (axisHorizontal != 0)
     {
       var changedRotation = new Vector3(0, 0, -axisHorizontal);
-      transform.Rotate(changedRotation * rotationSpeed);
+      //transform.Rotate(changedRotation * rotationSpeed);
+
+      _rocketRigidBody.velocity += new Vector3(axisHorizontal, 0f, 0f);
+
     }
   }
 
