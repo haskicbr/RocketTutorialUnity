@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 69215323}
   - component: {fileID: 69215322}
   m_Layer: 0
-  m_Name: we
+  m_Name: right
   m_TagString: Traectory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07dbc31265bdd59498403bb57aff3705, type: 2}
+  - {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 147482130}
   - component: {fileID: 147482129}
   m_Layer: 0
-  m_Name: Left (1)
+  m_Name: left
   m_TagString: Traectory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07dbc31265bdd59498403bb57aff3705, type: 2}
+  - {fileID: 2100000, guid: 3f2effefbf573f8fba641e5370220954, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1272,6 +1272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rocket: {fileID: 2193573871091434196}
+  _leftTrajectoryLine: {fileID: 147482127}
+  _rightTrajectoryLine: {fileID: 69215320}
 --- !u!4 &1028991705
 Transform:
   m_ObjectHideFlags: 0

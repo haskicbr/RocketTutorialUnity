@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class SceneRunner : MonoBehaviour
 {
-  [SerializeField] private Button button;
-
+  [SerializeField] private Button startButton;
+  [SerializeField] private Button restartButton;
+  
   private void Start()
   {
-    button.onClick.AddListener(() => { SceneManager.LoadScene("Level 1"); });
+    startButton.onClick.AddListener(() => { SceneManager.LoadScene("Level 1"); });
   }
 }

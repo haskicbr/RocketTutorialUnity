@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameCamera : MonoBehaviour
 {
@@ -20,15 +21,28 @@ public class GameCamera : MonoBehaviour
   private void AddCameraFallEffect()
   {
     var rigidBody = gameObject.AddComponent<Rigidbody>();
-    rigidBody.mass = 2f;
+    rigidBody.mass = 2.5f;
     rigidBody.AddExplosionForce(200f, transform.position, 15.0F);
 
     var collider = gameObject.AddComponent<BoxCollider>();
     collider.size = new Vector3(1f, 1f, 1f);
 
     _isTrackingRocket = false;
+
+
+    StartCoroutine(ReturnToMainScreen());
+
   }
-  
+
+
+  IEnumerator ReturnToMainScreen()
+  {
+    
+    yield return new WaitForSeconds(5);
+    SceneManager.LoadScene("Main");
+  }
+
+
   private void Update()
   {
     if (_isTrackingRocket)
