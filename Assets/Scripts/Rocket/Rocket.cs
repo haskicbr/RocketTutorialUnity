@@ -5,18 +5,20 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(AudioSource))]
-public class Rocket : ComposeBody
+public class Rocket : ComposeBody, IDamagable
 {
   [SerializeField] private float _thrustForce = 30f;
   [SerializeField] private float _rotationSpeed = 100f;
   [SerializeField] private float _thrustForceHorizontal = 1000f;
   [SerializeField] private float _maxEngineVelocityY = 50f;
   [SerializeField] private float _minEngineVelocityY = 50f;
-  [SerializeField] private int _rocketHealth = 100;
+  [SerializeField] public int Health { get; private set; }
+
+
   [SerializeField] private HealthBar _healthBar;
   [SerializeField] private GameObject[] _rocketEngines;
   [SerializeField] private GameObject[] _rocketEnginesMain;
-  
+
   private Rigidbody _rocketRigidBody;
   private AudioSource _engineSound;
 
@@ -24,21 +26,29 @@ public class Rocket : ComposeBody
   {
     _rocketRigidBody = GetComponent<Rigidbody>();
     _engineSound = GetComponent<AudioSource>();
-    _healthBar.СhangeHealth(_rocketHealth);
+    _healthBar.СhangeHealth(Health);
 
     RocketEvents.DamageEvent.AddListener(Damage);
+    RocketEvents.IncreasePowerEvent.AddListener(IncreasePower);
+    
     RocketEvents.DestroyRocketEvent.AddListener(Destroy);
     RocketEvents.DisconnectEnginesSecond.AddListener(() => DetachObjects(_rocketEngines, _rocketRigidBody.velocity));
     RocketEvents.DisconnectEngineMain.AddListener(() => DetachObjects(_rocketEnginesMain, _rocketRigidBody.velocity));
   }
 
+  private void IncreasePower(int powerValue)
+  {
+    Health += powerValue;
+    _healthBar.СhangeHealth(Health);
+  }
+
   private void Damage(int damageValue)
   {
-    _rocketHealth -= damageValue;
+    Health -= damageValue;
 
-    _healthBar.СhangeHealth(_rocketHealth);
+    _healthBar.СhangeHealth(Health);
 
-    if (_rocketHealth <= 0)
+    if (Health <= 0)
     {
       RocketEvents.DestroyRocketEvent.Invoke();
       RocketEvents.DestroyRocketEvent.RemoveAllListeners();
@@ -50,11 +60,12 @@ public class Rocket : ComposeBody
   {
     RunEngine();
     var currentVelocity = _rocketRigidBody.velocity;
-      
+
     if (_rocketRigidBody.velocity.y <= _minEngineVelocityY)
     {
       _rocketRigidBody.velocity = new Vector3(currentVelocity.x, _minEngineVelocityY, currentVelocity.z);
     }
+
     Rotate();
   }
 
@@ -109,7 +120,6 @@ public class Rocket : ComposeBody
       //transform.Rotate(changedRotation * rotationSpeed);
 
       _rocketRigidBody.velocity += new Vector3(axisHorizontal, 0f, 0f);
-
     }
   }
 

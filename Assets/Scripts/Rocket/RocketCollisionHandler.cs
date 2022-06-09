@@ -12,9 +12,10 @@ public class RocketCollisionHandler : MonoBehaviour
     switch (other.transform.gameObject.tag)
     {
       case GameTags.SpaceTrash:
-        RocketEvents.DamageEvent.Invoke(10);
+        RocketEvents.DamageEvent.Invoke(30);
         Destroy(other.transform.gameObject.GetComponent<BoxCollider>());
         break;
+
     }
   }
   
@@ -26,7 +27,13 @@ public class RocketCollisionHandler : MonoBehaviour
         Destroy(other.transform.gameObject);
         break;
       case GameTags.Trajectory:
-        RocketEvents.DamageEvent.Invoke(100);
+        RocketEvents.DamageEvent.Invoke(5);
+        break;
+            
+      case GameTags.Energy:
+        RocketEvents.IncreasePowerEvent.Invoke(15);
+        Destroy(other.transform.gameObject.GetComponent<BoxCollider>());
+        Destroy(other.transform.gameObject);
         break;
     }
   }
